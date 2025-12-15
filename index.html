@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sprinkler Irrigation Design – CE 555 Q1</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+</head>
+
+<body>
+
+<header>
+  <h3>Sprinkler Irrigation Design Tool - Thomas Baah</h3>
+  <h3>CE 555 – Question 1 Testing</h3>
+</header>
+
+<div class="main">
+
+  <!-- =========================
+       TOP SECTION (3 COLUMNS)
+  ========================== -->
+  <div class="top">
+
+    <!-- INPUTS -->
+    <div class="panel inputs">
+      <h2>Inputs / Given Data</h2>
+
+      <label>Field Length EW (m)
+        <input id="L_EW" type="number" value="500">
+      </label>
+
+      <label>Field Width NS (m)
+        <input id="W_NS" type="number" value="400">
+      </label>
+
+      <label>Design Crop ET (mm/day)
+        <input id="ET" type="number" value="15">
+      </label>
+
+      <label>Evaporation Loss (%)
+        <input id="EVAP" type="number" value="12">
+      </label>
+
+      <label>Number of Zones (N_EW × N_NS)
+        <input id="ZONES" type="number" value="4">
+      </label>
+
+      <label>End of Lateral Pressure (kPa)
+        <input id="P_END" type="number" value="103">
+      </label>
+
+      <button onclick="runDesign()">Run Calculations (Q1)</button>
+      <button onclick="downloadReport()">Download Report</button>
+    </div>
+
+    <!-- CALCULATIONS -->
+    <div class="panel calcs">
+      <h2>Calculations, Parameters & Results</h2>
+      <pre id="calcOutput" class="calc-output">
+Run calculation to see results...
+      </pre>
+    </div>
+
+    <!-- PLOTS -->
+    <div class="panel plots">
+      <h2>Visualization</h2>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="openTab(event,'fieldTab')">Field Layout</button>
+        <button class="tab-btn" onclick="openTab(event,'pressureTab')">Pressure Profile</button>
+        <button class="tab-btn" onclick="openTab(event,'pumpTab')">Pump Curves</button>
+      </div>
+
+      <div id="fieldTab" class="tab-content active">
+        <div id="fieldPlot"></div>
+      </div>
+
+      <div id="pressureTab" class="tab-content">
+        <div id="pressurePlot"></div>
+      </div>
+
+      <div id="pumpTab" class="tab-content">
+        <div id="pumpPlot"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =========================
+       BOTTOM REPORT PANEL
+  ========================== -->
+  <div class="bottom panel">
+    <h2>Generated Report Viewer</h2>
+    <textarea id="reportViewer" readonly>
+Run calculations to generate the full report.
+    </textarea>
+  </div>
+
+</div>
+
+<!-- =========================
+     TAB SCRIPT
+========================== -->
+<script>
+function openTab(evt, tabId) {
+  document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+
+  document.getElementById(tabId).classList.add("active");
+  evt.currentTarget.classList.add("active");
+
+  window.dispatchEvent(new Event("resize"));
+}
+</script>
+
+<!-- APP JS -->
+<script src="app.js"></script>
+
+</body>
+</html>
